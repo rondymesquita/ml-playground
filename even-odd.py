@@ -2,8 +2,8 @@ from sklearn.naive_bayes import MultinomialNB
 import pdb
 
 classes = {
-    1: "juice",
-    -1: "coffee"
+    -1: "odd",
+    1: "even"
 }
 
 
@@ -11,7 +11,7 @@ def _print(beverages, probalitities):
     index = 1
     for beverage, prob in zip(beverages, probalitities):
         b = classes[beverage]
-        print "\nBeverage {} is {}".format(index, b)
+        print "\nElement {} is {}".format(index, b)
         print "=== Odds"
         clazz1 = classes[model.classes_[0]]
         clazz2 = classes[model.classes_[1]]
@@ -27,43 +27,50 @@ def _print(beverages, probalitities):
 # is cold?
 # is organic?s
 def get_train_data():
-    juice1 = [1, 1, 1]
-    juice2 = [1, 1, 1]
-    juice3 = [1, 0, 1]
-    juice4 = [1, 1, 0]
+    odd1 = [1]
+    odd2 = [3]
+    odd3 = [1]
+    odd4 = [3]
+    odd5 = [3]
+    odd6 = [1]
+    odd7 = [3]
 
-    coffee1 = [0, 0, 1]
-    coffee2 = [0, 0, 1]
-    coffee3 = [0, 1, 1]
-    coffee4 = [0, 0, 0]
+    even0 = [0]
+    even1 = [2]
+    even2 = [0]
+    even3 = [2]
+    even4 = [0]
+    even5 = [2]
+    even6 = [0]
 
-    return [juice1, juice2, juice3, juice4,
-            coffee1, coffee2, coffee3, coffee4],\
-        [1, 1, 1, 1, -1, -1, -1, -1]
+    return [odd1, odd2, odd3, odd4, odd5, odd6, odd7,
+            even0, even1, even2, even3, even4, even5, even6],\
+        [-1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1]
 
 train_data, train_target = get_train_data()
 # training model
 model = MultinomialNB()
 model.fit(train_data, train_target)
 
-beverage1 = [1, 1, 0]  # maybe juice
-beverage2 = [0, 0, 1]  # maybe coffee
-beverage3 = [0, 1, 0]  # I can't tell...
+beverage1 = [1]
+beverage2 = [3]
+beverage3 = [2]
 unknown_beverages = [beverage1, beverage2, beverage3]
 
 beverages = model.predict(unknown_beverages)
 probalitities = model.predict_proba(unknown_beverages)
+print beverages, probalitities
 _print(beverages, probalitities)
 
 # improve learning with insertion of unknown data but specifing what they are
 # The probalities should be improved because the model is smarter now
-test_target = [1, -1, 1]
-model.fit(unknown_beverages, test_target)
-beverages = model.predict(unknown_beverages)
-probalitities = model.predict_proba(unknown_beverages)
-_print(beverages, probalitities)
+# test_target = [-1, 1, -1]
+# model.fit(unknown_beverages, test_target)
+# beverages = model.predict(unknown_beverages)
+# probalitities = model.predict_proba(unknown_beverages)
+# _print(beverages, probalitities)
 
-errors = beverages - test_target
-number_of_hits = errors.tolist().count(0)
-percent = 100 * number_of_hits / len(test_target)
-print "Hit ratio is {}%".format(abs(percent))
+# errors = beverages - test_target
+# number_of_hits = errors.tolist().count(0)
+# percent = 100 * number_of_hits / len(test_target)
+# print "Hit ratio is {}%".format(abs(percent))
