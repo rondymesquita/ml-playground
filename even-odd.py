@@ -23,9 +23,9 @@ def _print(beverages, probalitities):
 
     print("=============================================")
 
-# is sweet?
-# is cold?
-# is organic?s
+# value
+# is odd
+# is even
 def get_train_data():
     odd1 = [1]
     odd2 = [3]
@@ -35,27 +35,28 @@ def get_train_data():
     odd6 = [1]
     odd7 = [3]
 
-    even0 = [0]
-    even1 = [2]
+    even1 = [0]
     even2 = [0]
     even3 = [2]
     even4 = [0]
     even5 = [2]
     even6 = [0]
+    even7 = [2]
 
     return [odd1, odd2, odd3, odd4, odd5, odd6, odd7,
-            even0, even1, even2, even3, even4, even5, even6],\
-        [-1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1]
+            even1, even2, even3, even4, even5, even6, even7],\
+        [-1, -1, -1, -1, -1, -1, -1,
+          1, 1, 1, 1, 1, 1, 1]
 
 train_data, train_target = get_train_data()
 # training model
 model = MultinomialNB()
 model.fit(train_data, train_target)
 
-beverage1 = [1]
-beverage2 = [3]
-beverage3 = [2]
-unknown_beverages = [beverage1, beverage2, beverage3]
+number1 = [1]
+number2 = [2]
+number3 = [3]
+unknown_beverages = [number1, number2, number3]
 
 beverages = model.predict(unknown_beverages)
 probalitities = model.predict_proba(unknown_beverages)

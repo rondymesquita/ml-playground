@@ -57,13 +57,14 @@ _print(beverages, probalitities)
 
 # improve learning with insertion of unknown data but specifing what they are
 # The probalities should be improved because the model is smarter now
-test_target = [1, -1, 1]
-model.fit(unknown_beverages, test_target)
-beverages = model.predict(unknown_beverages)
-probalitities = model.predict_proba(unknown_beverages)
-_print(beverages, probalitities)
+# test_target = [1, -1, 1]
+# model.fit(unknown_beverages, test_target)
 
-errors = beverages - test_target
-number_of_hits = errors.tolist().count(0)
-percent = 100 * number_of_hits / len(test_target)
-print "Hit ratio is {}%".format(abs(percent))
+# beverages = model.predict(unknown_beverages)
+# probalitities = model.predict_proba(unknown_beverages)
+# _print(beverages, probalitities)
+
+# errors = beverages - test_target
+# number_of_hits = errors.tolist().count(0)
+# percent = 100 * number_of_hits / len(test_target)
+# print "Hit ratio is {}%".format(abs(percent))
